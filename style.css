@@ -301,3 +301,41 @@ button[type="submit"]:hover {
 button[type="submit"]:active {
     transform: translateY(0px);
 }
+
+/* Responsive design */
+@media screen and (max-width: 900px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    #transaction-list {
+        max-height: 300px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 24px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .balance-container h1 {
+        font-size: 2.5rem;
+    }
+
+    .income p, .expenses p {
+        font-size: 1.5rem;
+    }
+
+    .transaction {
+        padding: 14px 16px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+}
