@@ -4,6 +4,7 @@ const expenseAmountEl = document.getElementById("expense-amount");
 const transactionListEl = document.getElementById("transaction-list");
 const transactionFormEl = document.getElementById("transaction-form");
 const descriptionEl = document.getElementById("description");
+const transactionTypeEl = document.getElementById("type");
 const amountEl = document.getElementById("amount");
 
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
@@ -15,12 +16,16 @@ function addTransaction(event) {
 
     // get form values
     const description = descriptionEl.value.trim();
-    const amount = parseFloat(amountEl.value);
+    let amount = parseFloat(amountEl.value);
+    const transactionType = transactionTypeEl.value;
 
+    amount = transactionType === "income" ? amount : -amount;
+    
     transactions.push({
         id: Date.now(),
         description,
-        amount
+        amount,
+        transactionType
     });
 
     localStorage.setItem("transactions", JSON.stringify(transactions));
@@ -45,7 +50,7 @@ function updateTransactionList() {
 function createTransactionElement(transaction) {
     const li = document.createElement("li");
     li.classList.add("transaction");
-    li.classList.add(transaction.amount > 0 ? "income" : "expense");
+    li.classList.add(transaction.transactionType);
 
     li.innerHTML = `
     <span>${transaction.description}</span>
